@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+</head>
+
+<body>
+
+    @if(!isloginform){
+    <div class="container">
+
+        <form class="formClass" #loginform="ngForm" (ngSubmit)="submitfroms()">
+            <h1 class="header">Login</h1>
+
+            <label class="label">Email:</label>
+            <br>
+
+            <input class="input" type="email" name="email" #emailModel="ngModel" [(ngModel)]="useremail" required email placeholder="Enter your email">
+
+                @if(emailModel.invalid && emailModel.touched){
+            <div style="color: red">Please enter your email</div>
+                }
+
+                @if(emailModel.errors?.['email']){
+            <div style="color: red;">Please enter valid email
+                format(eg:abc@gmail.com)</div>
+            }
+            <br><br>
+
+
+            <label class="label">Password:</label>
+            <br>
+
+            <input class="input" type="password" name="password" #passwordModel="ngModel" [(ngModel)]="userpassword" required password placeholder="Enter your password">
+
+            @if(passwordModel.invalid && passwordModel.touched){
+            <div style="color: red;">Please enter your password
+            </div>
+        }
+
+            <button class="btn" type="submit" [disabled]="loginform.invalid">Submit</button>
+
+            <div class="accountbtn">
+                <button class="accbtn" type="button" (click)="goToSignUp()">Create Account</button>
+            </div>
+
+
+
+        </form>
+
+    </div>
+    }
+
+    @if(isloginform){
+    <div style="text-align: center; padding-top: 10px;">
+        <h1 style="color: black;">Logged in Successfully!</h1>
+    </div>
+    }
+</body>
+
+</html>
